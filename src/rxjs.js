@@ -1,4 +1,3 @@
-
 // RxJs
 
 document.querySelector('h3').textContent = 'RxJs';
@@ -11,29 +10,33 @@ const setText = text => {
 };
 
 const checkAuth = () => {
-    return new Promise((resolve, reject) => {
+    return rxjs.Observable.create((observer) => {
         setText('Checking Auth...');
         setTimeout(() => {
-            resolve(true);
+            observer.next(true);
         }, 2000);
     });
 };
 
 const fetchUser = () => {
-    return new Promise((resolve, reject) => {
+    return rxjs.Observable.create((observer) => {
         setText('Fetching User...');
         setTimeout(() => {
-            resolve('User fetched!');
+            observer.next('User fetched!');
         }, 2000);
     });
 };
 
-btn.addEventListener('click', () => {
-    checkAuth()
-        .then((isAuth) => {
-            return fetchUser();
+rxjs.fromEvent(document, 'click')
+    .pipe(
+        rxjs.operators.switchMap(() => checkAuth()),
+        rxjs.operators.switchMap((isAuth) => {
+            if (isAuth) {
+                return fetchUser();
+            }
         })
-        .then((user) => {
-            setText(user);
-        });
-});
+    )
+    .subscribe((user) => {
+        setText(user);
+    });
+
