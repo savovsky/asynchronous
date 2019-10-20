@@ -1,7 +1,7 @@
 
-// Promises ES6
+// async / await ES8
 
-document.querySelector('h3').textContent = 'promises';
+document.querySelector('h3').textContent = 'async / await';
 const btn = document.querySelector('button');
 const div = document.querySelector('div');
 
@@ -28,12 +28,12 @@ const fetchUser = () => {
     });
 };
 
-btn.addEventListener('click', () => {
-    checkAuth()
-        .then((isAuth) => {
-            return fetchUser();
-        })
-        .then((user) => {
-            setText(user);
-        });
+btn.addEventListener('click', async () => {
+    const isAuth = await checkAuth();
+    let user = null;
+
+    if (isAuth) {
+        user = await fetchUser();
+    }
+    setText(user);
 });
