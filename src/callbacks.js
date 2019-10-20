@@ -1,8 +1,9 @@
 
 // Callbacks
 
-const btn = document.querySelector('#btn-cb');
-const div = document.querySelector('#cb');
+document.querySelector('h3').textContent = 'callbacks';
+const btn = document.querySelector('button');
+const div = document.querySelector('div');
 
 // helper function - rendering the text
 const setText = text => {
