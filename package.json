@@ -4,7 +4,8 @@
   "description": "training",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development --entry ./index.js --output dist/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,10 @@
   "homepage": "https://github.com/savovsky/asynchronous#readme",
   "dependencies": {
     "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
   }
 }
